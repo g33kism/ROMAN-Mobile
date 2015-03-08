@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:supportClasses="spark.skins.mobile.supportClasses.*"
+		xmlns:local="*"
+		creationComplete="view1_creationCompleteHandler(event)" title="HomeView">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.Base64Decoder;
+			
+			import spark.skins.mobile.supportClasses.SelectableButtonSkinBase;
+			
+			protected function items_resultHandler(event:ResultEvent):void
+			{
+				var itemList:ArrayCollection= items.lastResult as ArrayCollection;
+				for(var i:int=0;i<itemList.length;i++)
+				{
+					var item:ArrayCollection= itemList.getItemAt(i) as ArrayCollection;
+					var itemcomp:ItemAddComp= new ItemAddComp();
+					itemcomp.itemname=item.getItemAt(1).toString();
+					var decoder:Base64Decoder= new Base64Decoder();
+					decoder.decode(item.getItemAt(2).toString());
+					itemcomp.image=decoder.toByteArray();
+					itemcomp.price=item.getItemAt(3).toString();
+					itemcomp.addEventListener(MouseEvent.CLICK,item_clickHandler);
+					vItemList.addElement(itemcomp);
+				}
+			}
+			protected function item_clickHandler(event:MouseEvent):void
+			{
+			//	test.text=event.target.toString();
+				if (event.target.toString().search("itemImg")>-1)
+				{
+					var temp:Array= new Array(event.currentTarget.itemname,event.currentTarget.image,event.currentTarget.price);
+					navigator.pushView(ItemDetails,temp);
+				}
+				else if (event.target.toString().search("btnadd")>-1)
+					{
+					
+						for(var i:int=0;i<hOrderList.numElements;i++)
+						{
+							var sitem:SelectedItems=new SelectedItems();
+							sitem=hOrderList.getElementAt(i) as SelectedItems;
+							if(sitem.itemname==event.currentTarget.itemname){
+								sitem.qty=(int(sitem.qty)+1)+"";
+								return;
+							}
+						}
+						var sitem:SelectedItems=new SelectedItems();
+						sitem.itemname=event.currentTarget.itemname;
+						sitem.pic=event.currentTarget.image;
+						sitem.qty="1";
+						sitem.price=event.currentTarget.price;
+						hOrderList.addElement(sitem);
+						DataStructure.ordereditems.addItem(sitem);
+					}
+					else if (event.target.toString().search("btnsub")>-1)
+						{
+						for(var i:int=0;i<hOrderList.numElements;i++)
+						{
+							var sitem:SelectedItems=new SelectedItems();
+							sitem=hOrderList.getElementAt(i) as SelectedItems;
+							if(sitem.itemname==event.currentTarget.itemname){
+								sitem.qty=(int(sitem.qty)-1)+"";
+								if(sitem.qty=="0")
+								{
+									hOrderList.removeElement(sitem);
+									DataStructure.ordereditems.removeItemAt(i);
+								}
+								return;
+							}
+						}
+						}
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:WebService wsdl="http://{DataStructure.server}:8080/roman/MenuItemService?wsdl" id="MenuItem"/>
+		<s:CallResponder id="items" result="items_resultHandler(event)" />
+	</fx:Declarations>
+
+	<s:navigationContent>
+		<s:Button width="42" height="32" icon="@Embed('assets/home.png')"
+				  click="navigator.popToFirstView()"/>
+	</s:navigationContent>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			[Bindable]
+			public static var Cuisine:String;
+			
+			[Bindable]
+			public static var Category:String;
+			
+			protected function view1_creationCompleteHandler(event:FlexEvent):void
+			{
+				items.token=MenuItem.getMenuItemsByCatNCui(Category,Cuisine);	
+				for(var i:int=0;i<DataStructure.ordereditems.length;i++)
+					hOrderList.addElement(DataStructure.ordereditems.getItemAt(i) as SelectedItems);
+			}
+			
+		]]>
+	</fx:Script>
+	<s:titleContent>
+		<s:Group left="0" top="0" width="228" height="41">
+			<s:TextInput id="key" x="126" y="5" width="132" height="31"/>
+			<s:Label x="-4" y="10" color="#FCFAFA" text="{Cuisine} {Category}" />
+		</s:Group>
+	</s:titleContent>
+	
+	<s:Label x="114" y="354" color="#060606" fontFamily="Palatino Linotype" fontSize="15"
+			 fontStyle="italic" fontWeight="bold" text="Your Order"/>
+	<s:Button x="88" y="433" width="139" height="24" label="Finalize Your Order" fontFamily="Georgia"
+			  fontSize="12" fontWeight="normal" click="navigator.pushView(FinalOrderList)" />
+	<s:Scroller x="0" y="375" width="320" height="49">
+		<s:HGroup id="hOrderList" width="100%" height="100%">
+		</s:HGroup>
+	</s:Scroller>
+	<s:Scroller x="0" y="0" width="320" height="338">
+		<s:VGroup id="vItemList" width="100%" height="100%">
+		</s:VGroup>
+	</s:Scroller>
+</s:View>

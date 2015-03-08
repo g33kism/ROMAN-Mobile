@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		actionBarVisible="false" tabBarVisible="false" title="ItemComp">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var itemname:String;	
+			[Bindable] 
+			public var price:String;
+			[Bindable]
+			public var image:ByteArray;
+		]]>
+	</fx:Script>
+	<s:Group x="0" y="10" width="320" height="76">
+		<s:Button id="btnadd" x="206" y="10" width="51" height="47" label="+" fontSize="12"
+				  fontWeight="bold" />
+		<s:Button id="btnsub" x="268" y="9" width="51" height="47" label="--" fontSize="12"
+				  fontWeight="bold"/>
+		<s:Label x="1" y="71" width="319" height="2" backgroundAlpha="50" backgroundColor="#5D5151"/>
+		<s:Label id="lblname" x="79" y="4" width="119" height="43" fontFamily="Palatino Linotype"
+				 fontStyle="italic" fontWeight="bold" text="{itemname}"/>
+		<s:Label id="lblname0" x="79" y="49" fontFamily="Palatino Linotype" fontStyle="italic"
+				 fontWeight="bold" text="Price: Rs.{price}"/>
+	</s:Group>
+	<s:Image id="itemImg" x="0" y="10" width="77" height="64" scaleMode="letterbox"
+			 skinClass="ImageButtonSkin" smooth="true" source="{image}"/>
+</s:View>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:views="views.*"
+		xmlns:supportClasses="spark.skins.mobile.supportClasses.*"
+		fontStyle="italic" title="Choose From" xmlns:local="*" creationComplete="view1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			protected function callresponder1_resultHandler(event:ResultEvent):void
+			{
+				listcollection=catToken.lastResult as ArrayCollection;
+				
+			}
+			
+			protected function view1_creationCompleteHandler(event:FlexEvent):void
+			{
+				catToken.token=MenuItem.getCategories(RomanDesginHomeView.Cuisine);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:navigationContent>
+		<s:Button icon="@Embed('assets/home.png')"
+				  click="navigator.popToFirstView()" />
+	</s:navigationContent>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			[Bindable]
+			private var listcollection:ArrayCollection=new ArrayCollection();
+			private function change(event:MouseEvent):void
+			{
+				RomanDesginHomeView.Category=list.selectedItem.toString();
+				navigator.pushView(RomanDesginHomeView);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		
+	<s:WebService wsdl="http://{DataStructure.server}:8080/roman/MenuItemService?wsdl" id="MenuItem"/>
+		<s:CallResponder id="catToken" result="callresponder1_resultHandler(event)" />
+		
+	</fx:Declarations>
+	
+	<s:List id="list" left="0" right="0" top="0" bottom="0" click="change(event)"
+			dataProvider="{listcollection}" fontFamily="Palatino Linotype" fontSize="14"
+			fontWeight="bold" skinClass="CustomListSkin" textAlign="center">
+		<s:itemRenderer >
+			<fx:Component>
+				<local:CustomItemRenderer label="{data.ItemName}" />
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+</s:View>

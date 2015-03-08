@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Settings">
+	
+	<fx:Script>
+		<![CDATA[
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				if(txtPassword.text=="roman")
+				{
+					DataStructure.tableno=txtTbl.text;
+					DataStructure.server=txtServer.text;
+					navigator.pushView(CuisineList);
+				}
+				else
+				{
+					lblError.text="Incorrect Password";
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Label x="19" y="31" text="Table No:"/>
+	<s:Label x="32" y="70" text="Server:"/>
+	<s:Button x="97" y="147" width="125" label="Set" click="button1_clickHandler(event)"/>
+	<s:TextInput id="txtTbl" x="87" y="17" width="163" height="30"/>
+	<s:TextInput id="txtServer" x="87" y="55" width="163" height="30"/>
+	<s:TextInput id="txtPassword" x="86" y="95" width="163" height="30" displayAsPassword="true"/>
+	<s:Label x="11" y="108" text="Password:"/>
+	<s:Label id="lblError" x="32" y="200" color="#FF0000"/>
+</s:View>

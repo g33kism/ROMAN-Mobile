@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<list>
+    <Item>
+    	<id>1</id>
+    	<ItemName>Pav Bhaji</ItemName>
+    	<ItemDescription> 2 Pav with tasty Bhaji and extra butter</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>Pav Bhaji.jpg</picture>
+    </Item>
+    <Item>
+    	<id>2</id>
+    	<ItemName>Masala Dosa</ItemName>
+    	<ItemDescription> Dosa with batata bhaji</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>Masala Dosa.jpg</picture>
+    </Item>
+    <Item>
+    	<id>3</id>
+    	<ItemName>Medu Wada</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>medu_wada1.jpg</picture>
+    </Item>
+    <Item>
+    	<id>4</id>
+    	<ItemName>Aloo Paratha</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>Aloo paratha.jpg</picture>
+    </Item>
+        <Item>
+    	<id>5</id>
+    	<ItemName>Chana Masala</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>chana masala.jpg</picture>
+    </Item>
+    <Item>
+    	<id>6</id>
+    	<ItemName>Dal Tadka</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>Dal tadka.jpg</picture>
+    </Item>
+    <Item>
+    	<id>7</id>
+    	<ItemName>Aloo Chole</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>aloo chole.jpg</picture>
+    </Item>
+    <Item>
+    	<id>8</id>
+    	<ItemName>Paneer Makhani</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>paneer makhani.jpg</picture>
+    </Item>
+    <Item>
+    	<id>9</id>
+    	<ItemName>Paneer Korma</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>paneer korma.jpg</picture>
+    </Item>
+    <Item>
+    	<id>10</id>
+    	<ItemName>Matar Gobi</ItemName>
+    	<ItemDescription> 2 wada with sambhar</ItemDescription>
+    	<UnitPrice>300</UnitPrice>
+    	<picture>matar gobi.jpg</picture>
+    </Item>
+    
+</list>

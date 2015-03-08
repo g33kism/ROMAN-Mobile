@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		actionBarVisible="true" title="{data[0]}" creationComplete="items.token=MenuItem.getDescriptionByName(data[0])">
+	<fx:Script>
+		<![CDATA[
+			import mx.rpc.events.ResultEvent;
+			[Bindable]
+			private var desc:String;
+			protected function items_resultHandler(event:ResultEvent):void
+			{
+				desc=items.lastResult as String;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:WebService wsdl="http://{DataStructure.server}:8080/roman/MenuItemService?wsdl" id="MenuItem"/>
+		<s:CallResponder id="items" result="items_resultHandler(event)" />
+	</fx:Declarations>
+	
+	
+	<s:HGroup verticalAlign="middle" gap="12">
+		
+	</s:HGroup>
+	<s:VGroup x="34" y="261" width="271" fontFamily="Palatino Linotype" >
+		<s:Label color="#531020" fontFamily="Palatino Linotype" fontSize="14" fontStyle="italic"
+				 fontWeight="bold" text="Dish: " textAlign="right"/>
+		<s:Label width="84" maxWidth="250" color="#531020" fontFamily="Palatino Linotype"
+				 fontSize="14" fontStyle="italic" fontWeight="bold"
+				 text="Description: "/>
+		<s:Label width="267" color="#5D450B" fontFamily="Palatino Linotype" fontSize="13"
+				 text="{desc}"/>
+		<s:Label color="#531020" fontFamily="Palatino Linotype" fontSize="14" fontStyle="italic"
+				 fontWeight="bold" text="Price:Rs." textAlign="right"/>
+		<s:Label color="#5D450B" fontFamily="Palatino Linotype" fontSize="13" text="{data[2]}"/>
+	</s:VGroup>
+	<s:Image x="14" y="10" width="291" height="228" scaleMode="letterbox" smooth="true"
+			 source="{data[1]}" skinClass="ImageButtonSkin"/>
+	<s:Label x="78" y="261" color="#5D450B" fontFamily="Palatino Linotype" fontSize="13"
+			 text="{data[0]}"/>
+	
+	
+</s:View>
